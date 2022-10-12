@@ -7,4 +7,5 @@ urlpatterns = [
     path('accounts/client/', views.RegisterClient.as_view(), name="register_client"),
     path('accounts/profile/', views.Profile.as_view(), name="profile"),
     path('chefs/', views.ChefsList.as_view(), name="chefs_list"),
+    path('chefs/<int:pk>/', views.ChefDetail.as_view(), name="chef_detail"),
 ]

@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views import View
 
 from django.views.generic.base import TemplateView
+from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from main_app.forms import RegisterChefForm, RegisterClientForm
@@ -64,4 +65,13 @@ class ChefsList(TemplateView):
             context["chefs"] = Chef.objects.filter()
             # default header for not searching 
             context["header"] = "Chefs around here"
+        return context
+
+class ChefDetail(DetailView):
+    model = Chef
+    template_name = "chef_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chefs'] = Chef.objects.all()
         return context

@@ -23,7 +23,9 @@
       {% for chef in chefs %}
     
         <div class="card">
+          <a href="{% url 'chef_detail' chef.pk %}">
             {{chef.role}} {{chef.first_name}} in {{chef.location}}
+          </a> 
         </div>
         {% empty %}
       <article class="message">

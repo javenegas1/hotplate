@@ -10,15 +10,17 @@ class User(AbstractUser):
         CHEF = 'CHEF', 'Chef'
         CLIENT = 'CLIENT', 'Client'
     
-    class Location(models.TextChoices):
-        ATLANTA = 'ATLANTA', 'Atlanta'
-        DENVER = 'DENVER', 'Denver'
+    # class Location(models.TextChoices):
+    #     ATLANTA = 'ATLANTA', 'Atlanta'
+    #     DENVER = 'DENVER', 'Denver'
 
     role = models.CharField(verbose_name='role', max_length=50, choices=Role.choices, default=Role.CLIENT)
-    location = models.CharField(verbose_name='location', max_length=50, choices=Location.choices, default=Location.ATLANTA)
+    location = models.CharField(verbose_name='location', max_length=50)
 
     def get_absolute_url(self):
         return '{}'.format(self.username)
+
+    
 
 class ChefManager(UserManager):
 
