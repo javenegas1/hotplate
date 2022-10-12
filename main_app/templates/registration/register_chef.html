@@ -1,0 +1,10 @@
+{% block content %}
+
+<h1 class="title">New Chef Alert</h1>
+<form method="post" action="{% url 'register_chef' %}">
+    {% csrf_token %} {{ form.as_p }}
+    <input type="submit" class="btn" value="Sign Up" />
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endblock %}
