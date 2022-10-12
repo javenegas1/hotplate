@@ -1,0 +1,50 @@
+scrapped models attempt to create substitute user class--------->
+
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
+
+class UserManager(BaseUserManager):
+    def create_user(self,email,first_name,last_name,password):
+        if not email:
+            raise ValueError('User must have email')
+        email = self.normalize_email(email)
+        user = self.model(email=email, first_name=first_name, last_name=last_name)
+
+        user.set_password(password)
+        user.save(using=self._db)
+
+        return user
+    def create_superuser(self, *args, **kwargs):
+        user = self.create_user(*args, **kwargs)
+        user.is_superuser = True
+        user.is_staff = True
+        user.save(using=self._db)
+
+class User(AbstractBaseUser, PermissionsMixin):
+
+    class Role(models.TextChoices):
+        ADMIN = 'Admin'
+        CHEF = 'Chef'
+        CLIENT = 'Client'
+
+    base_role = Role.ADMIN
+
+    objects = UserManager()
+
+    email = models.EmailField(verbose_name='email', max_length=100, unique=True)
+    first_name = models.CharField(verbose_name='first_name', max_length=100)
+    last_name = models.CharField(verbose_name='last_name', max_length=100)
+    role = models.CharField(max_length=30, choices=Role.choices)
+
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=True)
+    is_admin = models.BooleanField(default=True)
+
+    EMAIL_FIELD = 'email'
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = ['first_name', 'last_name']
+
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            self.role=self.base_role
+            return super().save(*args, **kwargs)
