@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    {% extends 'nav.html' %} 
+
+    <body>
+        {% block content %}
+        <h1>Welcome: {{user.role}} {{user.first_name}} {{user.last_name}}</h1>
+        {% endblock %}
+    </body>
+</html>
+
+

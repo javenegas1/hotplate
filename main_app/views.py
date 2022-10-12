@@ -1,5 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from django.views import View
 
 from django.views.generic.base import TemplateView
@@ -40,3 +43,7 @@ class RegisterClient(View):
         else:
             context = {"form": form}
             return render(request, "registration/register_client.html", context)
+
+@method_decorator(login_required, name='dispatch')
+class Profile(TemplateView):
+    template_name = 'profile.html'
