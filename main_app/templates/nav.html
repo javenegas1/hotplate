@@ -26,18 +26,19 @@
                 <a class="navbar-item" href="/accounts/profile">Profile</a>
             </div>
             <div class="navbar-start">
-                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item" href="/chefs">Search for Chefs</a>
             </div>
           
             {% if user.is_authenticated %}
                 <div class="navbar-menu navbar-end">
-                    <span class="navbar-item">Welcome: {{user.first_name}} {{user.last_name}}</span>
+                    <span class="navbar-item">Hello {{user.first_name}}!</span>
                     <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
                 </div>
             {% else %}
                 <div class="navbar-menu navbar-end">
                     <a class="navbar-item" href="{% url 'login' %}">Log In</a>
-                    <a class="navbar-item" href="{% url 'signup' %}">Sign Up</a>
+                    <a class="navbar-item" href="{% url 'register_chef' %}">Chef?</a>
+                    <a class="navbar-item" href="{% url 'register_client' %}">Client?</a>
                 </div>
             {% endif %}
         </nav>

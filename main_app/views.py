@@ -9,6 +9,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from main_app.forms import RegisterChefForm, RegisterClientForm
+from main_app.models import Chef
 # Create your views here.
 
 class Home(TemplateView):
@@ -47,3 +48,20 @@ class RegisterClient(View):
 @method_decorator(login_required, name='dispatch')
 class Profile(TemplateView):
     template_name = 'profile.html'
+
+class ChefsList(TemplateView):
+    template_name = 'chefs_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        location = self.request.GET.get('')
+
+        if location != None:
+            context["chefs"] = Chef.objects.filter(location__icontains=location)
+            # We add a header context that includes the search param
+            context["header"] = "Searching for chefs around {}".format(location)
+        else:
+            context["chefs"] = Chef.objects.filter()
+            # default header for not searching 
+            context["header"] = "Chefs around here"
+        return context

@@ -9,11 +9,17 @@ class User(AbstractUser):
     class Role(models.TextChoices):
         CHEF = 'CHEF', 'Chef'
         CLIENT = 'CLIENT', 'Client'
+    
+    class Location(models.TextChoices):
+        ATLANTA = 'ATLANTA', 'Atlanta'
+        DENVER = 'DENVER', 'Denver'
 
-    email=models.EmailField(verbose_name='email', max_length=100, unique=True)
+    email = models.EmailField(verbose_name='email', max_length=100, unique=True)
     first_name = models.CharField(verbose_name='first_name', max_length=100)
     last_name = models.CharField(verbose_name='last_name', max_length=100)
     role = models.CharField(verbose_name='role', max_length=50, choices=Role.choices, default=Role.CLIENT)
+    location = models.CharField(verbose_name='location', max_length=50, choices=Location.choices, default=Location.ATLANTA)
+
 
     def get_absolute_url(self):
         return '{}'.format(self.username)

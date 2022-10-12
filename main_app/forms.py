@@ -6,6 +6,7 @@ class RegisterChefForm(UserCreationForm):
     email = forms.EmailField(max_length=100)
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
+    location = forms.CharField(max_length=50)
 
     class Meta:
         model = Chef
@@ -16,6 +17,7 @@ class RegisterClientForm(UserCreationForm):
     email = forms.EmailField(max_length=100)
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
+    location = forms.CharField(max_length=50)
 
     class Meta:
         model = Client
