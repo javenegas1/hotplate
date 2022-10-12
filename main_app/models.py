@@ -26,27 +26,31 @@ class User(AbstractUser):
 
 class ChefManager(models.Manager):
     def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=User.Role.CHEF)
+        qs = super().get_queryset(*args, **kwargs).filter(role=User.Role.CHEF)
+        print(qs)
+        return qs
 
 class Chef(User):
 
-    # objects = ChefManager()
+    objects = ChefManager()
 
     class Meta:
         proxy = True
 
     def save(self, *args, **kwargs):
+        email = self.normalize_email(email)
         if not self.pk:
             self.role = User.Role.CHEF
         return super().save(*args, **kwargs)
 
 class ClientManager(models.Manager):
+    
     def get_queryset(self, *args, **kwargs):
-        return super().get_queryset(*args, **kwargs).filter(type=User.Role.CLIENT)
+        return super().get_queryset(*args, **kwargs).filter(role=User.Role.CLIENT)
 
 class Client(User):
 
-    # objects = ClientManager()
+    objects = ClientManager()
 
     class Meta:
         proxy = True

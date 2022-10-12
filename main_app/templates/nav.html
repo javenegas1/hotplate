@@ -22,9 +22,7 @@
                     <span aria-hidden="true"></span>
                 </a>
             </div>
-            <div class="navbar-start">
-                <a class="navbar-item" href="/accounts/profile">Profile</a>
-            </div>
+
             <div class="navbar-start">
                 <a class="navbar-item" href="/chefs">Search for Chefs</a>
             </div>
@@ -32,6 +30,7 @@
             {% if user.is_authenticated %}
                 <div class="navbar-menu navbar-end">
                     <span class="navbar-item">Hello {{user.first_name}}!</span>
+                    <a class="navbar-item" href="/accounts/profile">Profile</a>
                     <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
                 </div>
             {% else %}
