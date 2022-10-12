@@ -30,8 +30,6 @@ class RegisterChef(View):
             context = {"form": form}
             return render(request, "registration/register_chef.html", context)
 
-#one user create form, have user pick what kind of user they are, redirect or 
-
 class RegisterClient(View):
     def get(self, request):
         form = RegisterClientForm()

@@ -1,7 +1,7 @@
 from email.policy import default
 from random import choices
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, UserManager
 from django.urls import reverse 
 
 class User(AbstractUser):
@@ -14,17 +14,21 @@ class User(AbstractUser):
         ATLANTA = 'ATLANTA', 'Atlanta'
         DENVER = 'DENVER', 'Denver'
 
-    email = models.EmailField(verbose_name='email', max_length=100, unique=True)
-    first_name = models.CharField(verbose_name='first_name', max_length=100)
-    last_name = models.CharField(verbose_name='last_name', max_length=100)
     role = models.CharField(verbose_name='role', max_length=50, choices=Role.choices, default=Role.CLIENT)
     location = models.CharField(verbose_name='location', max_length=50, choices=Location.choices, default=Location.ATLANTA)
-
 
     def get_absolute_url(self):
         return '{}'.format(self.username)
 
-class ChefManager(models.Manager):
+class ChefManager(UserManager):
+
+    def create_user(self, *args, **kwargs):
+        if not email:
+            raise ValueError('User must have email')
+        email = self.normalize_email(email)
+        user = self.model(*args, **kwargs)
+        user.save(using=self._db)
+
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs).filter(role=User.Role.CHEF)
         print(qs)
@@ -38,12 +42,18 @@ class Chef(User):
         proxy = True
 
     def save(self, *args, **kwargs):
-        email = self.normalize_email(email)
         if not self.pk:
             self.role = User.Role.CHEF
         return super().save(*args, **kwargs)
 
-class ClientManager(models.Manager):
+class ClientManager(UserManager):
+
+    def create_user(self, *args, **kwargs):
+        if not email:
+            raise ValueError('User must have email')
+        email = self.normalize_email(email)
+        user = self.model(*args, **kwargs)
+        user.save(using=self._db)
     
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(role=User.Role.CLIENT)
