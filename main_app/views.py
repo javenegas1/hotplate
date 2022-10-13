@@ -4,13 +4,14 @@ from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
 from django.views import View
+from django.urls import reverse
 
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from main_app.forms import RegisterChefForm, RegisterClientForm
-from main_app.models import Chef
+from main_app.models import Chef, Request
 # Create your views here.
 
 class Home(TemplateView):
@@ -75,3 +76,24 @@ class ChefDetail(DetailView):
         context = super().get_context_data(**kwargs)
         context['chefs'] = Chef.objects.all()
         return context
+
+class RequestCreate(CreateView):
+    # model = Request
+    # fields = ['title', 'summary', 'people', 'date_of_event']
+    # template_name = "request_create.html"
+
+    # def form_valid(self, form):
+    #     form.instance.user = self.request.user
+    #     return super(RequestCreate, self).form_valid(form)
+
+    # def get_success_url(self):
+    #     return reverse('chef_detail', kwargs={'pk': self.object.pk})
+
+    def post(self, request, pk):
+        title = request.POST.get("title")
+        summary = request.POST.get("summary")
+        people = request.POST.get("people")
+        date_of_event = request.POST.get("date_of_event")
+        chef = Chef.objects.get(pk=pk)
+        Request.objects.create(title=title, summary=summary, people=people, date_of_event=date_of_event, chef=chef, user=self.request.user)
+        return redirect('chef_detail', pk=pk)

@@ -2,6 +2,53 @@
 {% block content %}
 <div>
     <h1>Meet Chef {{chef.first_name}} </h1>
+
+        <!-- create new sale -->
+        <form class="mb-5" action="{% url 'request_create' chef.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <input
+                        class="input"
+                        type="text"
+                        name="title"
+                        placeholder="Title"
+                        required
+                    />
+                </div>
+                <div class="control">
+                    <input
+                        class="input"
+                        type="textfield"
+                        name="summary"
+                        placeholder="Summary"
+                        min="1"
+                        required
+                    />
+                    <div class="control">
+                        <input
+                            class="input"
+                            type="number"
+                            name="people"
+                            placeholder="Number of People"
+                            min="1"
+                            required
+                        />
+                    <div class="control">
+                        <input
+                            class="input"
+                            type="date"
+                            name="date_of_event"
+                            placeholder="Date of Event"
+                            min="1"
+                            required
+                        />
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Submit Request" />
+                </div>
+            </div>
+        </form>
 </div>
 
 {% endblock %}

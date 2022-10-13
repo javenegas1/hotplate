@@ -1,0 +1,14 @@
+{% extends 'nav.html' %} 
+{% block content %}
+<h1>Submit a Request to this Chef</h1>
+
+<form method="post">
+<!-- Security Feature  -->
+  {% csrf_token %} 
+<!--  Generate inputs  -->
+  {{form.as_p}} 
+<!--  Submit form  -->
+  <input type="submit" value="Submit" />
+</form>
+
+{% endblock %}

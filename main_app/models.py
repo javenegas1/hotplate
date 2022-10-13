@@ -1,3 +1,4 @@
+from datetime import date
 from email.policy import default
 from random import choices
 from django.db import models
@@ -77,13 +78,15 @@ class Request(models.Model):
     title = models.CharField(max_length=50)
     summary = models.TextField(max_length=300)
     people = models.IntegerField(default=1)
+    date_of_event = models.DateField(default=date.today)
 
+    chef = models.ForeignKey(Chef, on_delete=models.CASCADE, default=1, related_name="requests")
     user = models.ForeignKey(Client, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.title
 
     class Meta:
-        ordering = ['title']
+        ordering = ['date_of_event']
 
 ##one to one calendar to chef model
