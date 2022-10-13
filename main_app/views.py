@@ -78,16 +78,6 @@ class ChefDetail(DetailView):
         return context
 
 class RequestCreate(CreateView):
-    # model = Request
-    # fields = ['title', 'summary', 'people', 'date_of_event']
-    # template_name = "request_create.html"
-
-    # def form_valid(self, form):
-    #     form.instance.user = self.request.user
-    #     return super(RequestCreate, self).form_valid(form)
-
-    # def get_success_url(self):
-    #     return reverse('chef_detail', kwargs={'pk': self.object.pk})
 
     def post(self, request, pk):
         title = request.POST.get("title")

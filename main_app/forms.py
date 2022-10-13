@@ -4,8 +4,8 @@ from django import forms
 
 
 LOCATION_CHOICES = (
-    ("1", "Atlanta"),
-    ("2", "Denver"))
+    ("Atlanta", "Atlanta"),
+    ("Denver", "Denver"))
 
 class RegisterChefForm(UserCreationForm):
     email = forms.EmailField(max_length=100)
@@ -15,15 +15,15 @@ class RegisterChefForm(UserCreationForm):
 
     class Meta:
         model = Chef
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'location')
 
 
 class RegisterClientForm(UserCreationForm):
     email = forms.EmailField(max_length=100)
     first_name = forms.CharField(max_length=100)
     last_name = forms.CharField(max_length=100)
-    location = forms.CharField(max_length=50)
+    location = forms.ChoiceField(choices=LOCATION_CHOICES)
 
     class Meta:
         model = Client
-        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2')
+        fields = ('username', 'email', 'first_name', 'last_name', 'password1', 'password2', 'location')

@@ -49,6 +49,30 @@
                 </div>
             </div>
         </form>
+
+        <!-- manage list of requests -->
+        <div class="detail__songs mb-5">
+            <h3 class="title is-3">Requests</h3>
+    
+            {% for request in chef.requests.all %}
+                <div class="song">
+                    <span>{{forloop.counter}}</span>
+                    <span><b>{{request.title}}</b></span>
+                     <!-- drop down for the event information -->
+                </div>
+    
+            {% empty %}
+                <article class="message">
+                    <div class="message-header">
+                        <p>No Requests for this Chef</p>
+                    </div>
+                </article>
+    
+            {% endfor %}
+        </div>
+
+
+
 </div>
 
 {% endblock %}
