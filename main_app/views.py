@@ -60,11 +60,9 @@ class ChefsList(TemplateView):
 
         if location != None:
             context["chefs"] = Chef.objects.filter(location__icontains=location)
-            # We add a header context that includes the search param
             context["header"] = "Searching for chefs around {}".format(location)
         else:
             context["chefs"] = Chef.objects.filter()
-            # default header for not searching 
             context["header"] = "Chefs around here"
         return context
 
@@ -87,3 +85,25 @@ class RequestCreate(CreateView):
         chef = Chef.objects.get(pk=pk)
         Request.objects.create(title=title, summary=summary, people=people, date_of_event=date_of_event, chef=chef, user=self.request.user)
         return redirect('chef_detail', pk=pk)
+
+class RequestUpdate(UpdateView):
+    model = Request 
+    fields = ['title', 'summary', 'people', 'date_of_event']
+    template_name = "request_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['requests'] = Request.objects.all()
+        return context
+
+    def get_success_url(self):
+        return reverse('chef_detail', kwargs={'pk': self.object.pk})
+
+class RequestDetail(DetailView):
+    model = Request
+    template_name = "request_detail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['requests'] = Request.objects.all()
+        return context

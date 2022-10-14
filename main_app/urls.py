@@ -9,4 +9,8 @@ urlpatterns = [
     path('chefs/', views.ChefsList.as_view(), name="chefs_list"),
     path('chefs/<int:pk>/', views.ChefDetail.as_view(), name="chef_detail"),
     path('chefs/<int:pk>/request', views.RequestCreate.as_view(), name="request_create"),
+    path('requests/<int:pk>',views.RequestDetail.as_view(), name="request_detail"),
+    # path('requests/<int:pk>/update',views.RequestUpdate.as_view(), name="request_update"),
+    
+
 ]

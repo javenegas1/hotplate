@@ -59,6 +59,9 @@
                     <span>{{forloop.counter}}</span>
                     <span><b>{{request.title}}</b></span>
                      <!-- drop down for the event information -->
+                     <p> {{request.summary}} </p>
+                     <p> Estimated: {{request.people}} people</p>
+                     <p> {{request.date_of_event}} </p>
                 </div>
     
             {% empty %}
