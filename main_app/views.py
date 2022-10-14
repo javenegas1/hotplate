@@ -108,13 +108,3 @@ class RequestDelete(DeleteView):
 
     def get_success_url(self):
         return '/chefs/{}'.format(self.object.chef_id)
-
-
-class RequestDetail(DetailView):
-    model = Request
-    template_name = "request_detail.html"
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['requests'] = Request.objects.all()
-        return context
