@@ -51,13 +51,6 @@ class RegisterClient(View):
 class Profile(TemplateView):
     template_name = 'profile.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['requests'] = Request.objects.all()
-        print(context)
-        return context
-        
-
 class ChefsList(TemplateView):
     template_name = 'chefs_list.html'
 
