@@ -101,6 +101,7 @@ class RequestUpdate(UpdateView):
     def get_success_url(self):
         return '/chefs/{}'.format(self.object.chef_id)
 
+@method_decorator(login_required, name='dispatch')
 class RequestDelete(DeleteView):
     model = Request
     template_name = "request_delete_confirm.html"
