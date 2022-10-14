@@ -11,7 +11,7 @@ from django.views.generic import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from main_app.forms import RegisterChefForm, RegisterClientForm
-from main_app.models import Chef, Request
+from main_app.models import Chef, Request, Comment
 # Create your views here.
 
 class Home(TemplateView):
@@ -50,6 +50,13 @@ class RegisterClient(View):
 @method_decorator(login_required, name='dispatch')
 class Profile(TemplateView):
     template_name = 'profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['requests'] = Request.objects.all()
+        print(context)
+        return context
+        
 
 class ChefsList(TemplateView):
     template_name = 'chefs_list.html'
@@ -105,7 +112,15 @@ class RequestUpdate(UpdateView):
 class RequestDelete(DeleteView):
     model = Request
     template_name = "request_delete_confirm.html"
-    # success_url = "/chefs/{}".format()
 
     def get_success_url(self):
         return '/chefs/{}'.format(self.object.chef_id)
+
+@method_decorator(login_required, name='dispatch')
+class CommentCreate(CreateView):
+
+    def post(self, request, pk):
+        body = request.POST.get("body")
+        chef = Chef.objects.get(pk=pk)
+        Comment.objects.create(body=body, chef=chef, name=self.request.user)
+        return redirect('chef_detail', pk=pk)

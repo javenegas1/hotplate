@@ -83,6 +83,18 @@ class Request(models.Model):
     class Meta:
         ordering = ['date_of_event']
 
-##many to many comments to chef 
 ##rating system??
 ##add profile pictures - stretch
+
+class Comment(models.Model):
+
+    chef = models.ForeignKey(Chef, on_delete=models.CASCADE, default=1, related_name="comments")
+    name = models.ForeignKey(Client, on_delete=models.CASCADE, default=1)
+    body = models.TextField(default='comment')
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return '{} commented on {}'.format(self.name.username, self.created)
+    
+    class Meta:
+        ordering = ['created']

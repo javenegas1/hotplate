@@ -24,7 +24,7 @@
     
         <div class="card">
           <a href="{% url 'chef_detail' chef.pk %}">
-            {{chef.role}} {{chef.first_name}} in {{chef.location}}
+            Chef {{chef.first_name}} in {{chef.location}}
           </a> 
         </div>
         {% empty %}

@@ -11,4 +11,5 @@ urlpatterns = [
     path('chefs/<int:pk>/request', views.RequestCreate.as_view(), name="request_create"),
     path('requests/<int:pk>/update',views.RequestUpdate.as_view(), name="request_update"),
     path('requests/<int:pk>/delete',views.RequestDelete.as_view(), name="request_delete"),
+    path('chefs/<int:pk>/comment', views.CommentCreate.as_view(), name="comment_create"),
 ]

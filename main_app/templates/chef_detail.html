@@ -3,7 +3,7 @@
 <div>
     <h1>Meet Chef {{chef.first_name}} </h1>
 
-        <!-- create new sale -->
+        <!-- create new request -->
         <form class="mb-5" action="{% url 'request_create' chef.pk %}" method="post">
             {% csrf_token %}
             <div class="field has-addons">
@@ -85,6 +85,44 @@
             {% endfor %}
         </div>
 
+            <!-- comment form -->
+
+        <form class="mb-5" action="{% url 'comment_create' chef.pk %}" method="post">
+            {% csrf_token %}
+            <div class="field has-addons">
+                <div class="control">
+                    <textarea
+                        class="input"
+                        name="body"
+                        placeholder="Comment"
+                        required
+                    ></textarea>
+                </div>
+                <div class="control">
+                    <input class="button is-primary" type="submit" value="Comment" />
+                </div>
+            </div>
+        </form>
+
+                <!-- manage list of comments -->
+                <div class="detail__songs mb-5">
+                    <h3 class="title is-3">Comments</h3>
+            
+                    {% for comment in chef.comments.all %}
+                        <div class="song">
+                            <span>{{forloop.counter}}</span>
+                            <span><b>{{comment.name.username}}</b></span>
+                             <p> {{comment.body}} </p>
+                        </div>
+                    {% empty %}
+                        <article class="message">
+                            <div class="message-header">
+                                <p>No Comments for this Chef</p>
+                            </div>
+                        </article>
+                    {% endfor %}
+                </div>
+        
 
 
 </div>
