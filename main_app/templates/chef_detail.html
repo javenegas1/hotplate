@@ -62,6 +62,19 @@
                      <p> {{request.summary}} </p>
                      <p> Estimated: {{request.people}} people</p>
                      <p> {{request.date_of_event}} </p>
+                     <div class="detail__container">
+                        <div class="buttons">
+                            <a href="{% url 'request_update' request.pk %}" class="button is-info">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                            </a>
+                            <a href="/requests/{{request.id}}/delete" class="button is-danger">
+                                <span class="icon">
+                                    <i class="fas fa-trash-alt"></i>
+                                </span>
+                            </a>
+                        </div>
                 </div>
     
             {% empty %}

@@ -75,6 +75,7 @@ class ChefDetail(DetailView):
         context['chefs'] = Chef.objects.all()
         return context
 
+@method_decorator(login_required, name='dispatch')
 class RequestCreate(CreateView):
 
     def post(self, request, pk):
@@ -86,6 +87,7 @@ class RequestCreate(CreateView):
         Request.objects.create(title=title, summary=summary, people=people, date_of_event=date_of_event, chef=chef, user=self.request.user)
         return redirect('chef_detail', pk=pk)
 
+@method_decorator(login_required, name='dispatch')
 class RequestUpdate(UpdateView):
     model = Request 
     fields = ['title', 'summary', 'people', 'date_of_event']
@@ -97,7 +99,16 @@ class RequestUpdate(UpdateView):
         return context
 
     def get_success_url(self):
-        return reverse('chef_detail', kwargs={'pk': self.object.pk})
+        return '/chefs/{}'.format(self.object.chef_id)
+
+class RequestDelete(DeleteView):
+    model = Request
+    template_name = "request_delete_confirm.html"
+    # success_url = "/chefs/{}".format()
+
+    def get_success_url(self):
+        return '/chefs/{}'.format(self.object.chef_id)
+
 
 class RequestDetail(DetailView):
     model = Request
