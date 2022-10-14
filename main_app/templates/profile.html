@@ -6,6 +6,33 @@
         {% block content %}
         <h1>Welcome: {{user.role}} {{user.first_name}} {{user.last_name}}</h1>
         {{user.id}}
+
+        {% for request in requests%}
+        <span><b>{{request.title}}</b></span>
+                     <!-- drop down for the event information -->
+                     <p> {{request.summary}} </p>
+                     <p> Estimated: {{request.people}} people</p>
+                     <p> {{request.date_of_event}} </p>
+                     <div class="detail__container">
+                        <div class="buttons">
+                            <a href="{% url 'request_update' request.pk %}" class="button is-info">
+                                <span class="icon">
+                                    <i class="fas fa-edit"></i>
+                                </span>
+                            </a>
+                            <a href="/requests/{{request.id}}/delete" class="button is-danger">
+                                <span class="icon">
+                                    <i class="fas fa-trash-alt"></i>
+                                </span>
+                            </a>
+        {% empty %}
+        <article class="message">
+          <div class="message-header">
+            <p>No Requests Available</p>
+          </div>
+        </article>
+        {% endfor %}
+
         {% endblock %}
     </body>
 

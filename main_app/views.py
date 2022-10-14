@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 
@@ -7,7 +7,7 @@ from django.views import View
 from django.urls import reverse
 
 from django.views.generic.base import TemplateView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from main_app.forms import RegisterChefForm, RegisterClientForm
@@ -50,6 +50,18 @@ class RegisterClient(View):
 @method_decorator(login_required, name='dispatch')
 class Profile(TemplateView):
     template_name = 'profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['requests'] = Request.objects.filter(chef=self.request.user.id)
+        return context
+
+# class Profile(ListView):
+#     template_name = 'profile.html'
+
+#     def get_queryset(self):
+#         print(self.request.user.id)
+#         return Request.objects.filter(chef=self.request.user.id)
 
 class ChefsList(TemplateView):
     template_name = 'chefs_list.html'
