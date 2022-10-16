@@ -56,13 +56,6 @@ class Profile(TemplateView):
         context['requests'] = Request.objects.filter(chef=self.request.user.id)
         return context
 
-# class Profile(ListView):
-#     template_name = 'profile.html'
-
-#     def get_queryset(self):
-#         print(self.request.user.id)
-#         return Request.objects.filter(chef=self.request.user.id)
-
 class ChefsList(TemplateView):
     template_name = 'chefs_list.html'
 
