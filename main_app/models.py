@@ -97,4 +97,4 @@ class Comment(models.Model):
         return '{} commented on {}'.format(self.name.username, self.created)
     
     class Meta:
-        ordering = ['created']
+        ordering = ['-created']
