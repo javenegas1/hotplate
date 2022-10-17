@@ -5,6 +5,8 @@ from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.urls import reverse 
+from distutils.command.upload import upload
+
 
 class User(AbstractUser):
 
@@ -15,6 +17,15 @@ class User(AbstractUser):
     role = models.CharField(verbose_name='role', max_length=50, choices=Role.choices, default=Role.CLIENT)
     location = models.CharField(verbose_name='location', max_length=50)
     bio = models.TextField(verbose_name='bio', max_length=500, default='bio')
+    profile_picture = models.ImageField(null=True,blank=True, upload_to='images/')
+
+    @property
+    def profile_pic_url(self):
+        try:
+            url=self.profile_picture
+        except:
+            url=''
+        return url
 
     def get_absolute_url(self):
         return '{}'.format(self.username)

@@ -60,7 +60,7 @@ class Profile(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class ProfileUpdate(UpdateView):
     model = Chef 
-    fields = ['bio', 'location']
+    fields = ['bio', 'location', 'profile_picture']
     template_name = "profile_update.html"
 
     def get_context_data(self, **kwargs):
@@ -69,7 +69,7 @@ class ProfileUpdate(UpdateView):
         return context
 
     def get_success_url(self):
-        return 'accounts/profile/'
+        return '/accounts/profile/'
 
 class ChefsList(TemplateView):
     template_name = 'chefs_list.html'

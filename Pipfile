@@ -11,6 +11,7 @@ django-environ = "*"
 django-heroku = "*"
 gunicorn = "*"
 whitenoise = "*"
+pillow = "*"
 
 [dev-packages]
 
