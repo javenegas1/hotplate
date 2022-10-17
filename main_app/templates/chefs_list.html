@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     {% extends 'nav.html' %} 
+
 <body>
     {% block content %}
     <h1 class="title pt-5">Search your city for chefs...</h1>
@@ -9,7 +10,7 @@
         <div class="field has-addons">
           <div class="control">
             <!--  Our input will search by name of artist  -->
-            <input class="input" type="text" name="location" placeholder="location" />
+            <input class="input" type="text" name="location" placeholder="city" />
           </div>
           <div class="control">
             <input class="button is-success" type="submit" value="Search" />

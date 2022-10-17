@@ -2,13 +2,40 @@
 {% block content %}
 
 <html>
- 
-<div>
-    <h1>Meet Chef {{chef.first_name}} </h1>
-        <!-- create new request -->
-        <form class="mb-5" action="{% url 'request_create' chef.pk %}" method="post">
+<style>
+.control{
+    padding-top: 10px;
+}
+.chefpage{
+    padding-top: 30px;
+}
+#commentsection{
+    padding-top: 35px;
+}
+</style>
+<div class="chefpage">
+
+    <div class="tile is-ancestor">
+        <div class="tile is-vertical is-6">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-danger">
+              <p class="title">Meet Chef {{chef.first_name}}</p>
+              <p class="subtitle">Based in {{chef.location}}</p>
+              <div class="content">
+                <!-- Content -->
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child notification is-success">
+            <div class="content">
+              <p class="title">Submit your Request</p>
+              <div class="content">
+                <!-- Content -->
+                   <!-- create new request -->
+        <form action="{% url 'request_create' chef.pk %}" method="post">
             {% csrf_token %}
-            <div class="field has-addons">
                 <div class="control">
                     <input
                         class="input"
@@ -41,41 +68,29 @@
                             type="date"
                             name="date_of_event"
                             placeholder="Date of Event"
-                            min="1"
                             required
                         />
                 </div>
                 <div class="control">
                     <input class="button is-primary" type="submit" value="Submit Request" />
                 </div>
-            </div>
         </form>
-
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    
         <!-- manage list of requests -->
-        <div class="detail__songs mb-5">
-            <h3 class="title is-3">Requests</h3>
+            <h3 class="title is-3">Upcoming Requests for {{chef.first_name}}</h3>
     
             {% for request in chef.requests.all %}
                 <div class="song">
-                    <span>{{forloop.counter}}</span>
                     <span><b>{{request.title}}</b></span>
                      <!-- drop down for the event information -->
-                     <p> {{request.summary}} </p>
-                     <p> Estimated: {{request.people}} people</p>
                      <p> {{request.date_of_event}} </p>
                      <div class="detail__container">
-                        <div class="buttons">
-                            <a href="{% url 'request_update' request.pk %}" class="button is-info">
-                                <span class="icon">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                            </a>
-                            <a href="/requests/{{request.id}}/delete" class="button is-danger">
-                                <span class="icon">
-                                    <i class="fas fa-trash-alt"></i>
-                                </span>
-                            </a>
-                        </div>
+
                 </div>
     
             {% empty %}
@@ -88,7 +103,11 @@
             {% endfor %}
         </div>
 
-            <!-- comment form -->
+                <!-- manage list of comments -->
+                <div class="detail__songs mb-5">
+                    <h3 id="commentsection" class="title is-3">What other have said...</h3>
+            
+                                <!-- comment form -->
 
         <form class="mb-5" action="{% url 'comment_create' chef.pk %}" method="post">
             {% csrf_token %}
@@ -105,17 +124,13 @@
                     <input class="button is-primary" type="submit" value="Comment" />
                 </div>
             </div>
-        </form>
+        </form> 
 
-                <!-- manage list of comments -->
-                <div class="detail__songs mb-5">
-                    <h3 class="title is-3">Comments</h3>
-            
                     {% for comment in chef.comments.all %}
                         <div class="song">
-                            <span>{{forloop.counter}}</span>
                             <span><b>{{comment.name.username}}</b></span>
                              <p> {{comment.body}} </p>
+                             <hr>
                         </div>
                     {% empty %}
                         <article class="message">
@@ -127,7 +142,6 @@
                 </div>
 
 </div>
-
 </html>
 
 {% endblock %}

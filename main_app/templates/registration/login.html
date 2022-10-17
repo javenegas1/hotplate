@@ -1,10 +1,17 @@
+{% extends 'nav.html' %}
 {% block content %}
-
+<style>
+    .login{
+        padding-top: 30px;
+    }
+</style>
+<div class="login">
 <h1 class="title">Log In</h1>
 <form method="post" action="{% url 'login' %}">
     {% csrf_token %} {{ form.as_p }}
-    <input type="submit" class="btn" value="login" />
+    <input type="submit" class="button is-success" value="Login" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
+</div>
 
 {% endblock %}
