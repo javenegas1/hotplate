@@ -1,7 +1,11 @@
 {% extends 'nav.html' %}
 {% block content %}
-
+{% load static %}
+{% load ratings %}
 <html>
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
 <style>
 .control{
     padding-top: 10px;
@@ -32,6 +36,10 @@
               <div class="content">
                 <!-- Content -->
                 {{chef.bio}}
+              </div>
+              <div class="content">
+                <!-- Content -->
+                {% ratings chef %}
               </div>
             </article>
           </div>

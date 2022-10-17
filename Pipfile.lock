@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "2b11ff9eff62db1d8b49e1aea39d058ff984e40868f9ee94ae3895cf6dd23330"
+            "sha256": "0c7dd093d8279937ad3e81c153ae58719ed7f505af410de934524ba0230378ea"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -39,6 +39,13 @@
             "index": "pypi",
             "version": "==4.1.2"
         },
+        "django-braces": {
+            "hashes": [
+                "sha256:28f00b0f98368c9a37f30cce6087fc57127f0a24c5b8b449f9e1245bded6405d",
+                "sha256:f451d08ffc1078d81209a2e17f2219bce20196928853c82405451b18a46875e0"
+            ],
+            "version": "==1.15.0"
+        },
         "django-environ": {
             "hashes": [
                 "sha256:bff5381533056328c9ac02f71790bd5bf1cea81b1beeb648f28b81c9e83e0a21",
@@ -54,6 +61,21 @@
             ],
             "index": "pypi",
             "version": "==0.3.1"
+        },
+        "django-model-utils": {
+            "hashes": [
+                "sha256:a768a25c80514e0ad4e4a6f9c02c44498985f36c5dfdea47b5b1e8cf994beba6",
+                "sha256:e7a95e102f9c9653427eadab980d5d59e1dea972913b9c9e01ac37f86bba0ddf"
+            ],
+            "version": "==4.2.0"
+        },
+        "django-star-ratings": {
+            "hashes": [
+                "sha256:7c7f55c1847087b932ca09c2cefb11240510fe384188250d15961024c9c8f2d8",
+                "sha256:8789275e11612295379cf5db7aafce43e2cf6d9aea63f4ba762220fe440997f3"
+            ],
+            "index": "pypi",
+            "version": "==0.9.2"
         },
         "gunicorn": {
             "hashes": [
@@ -224,6 +246,13 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.3"
+        },
+        "swapper": {
+            "hashes": [
+                "sha256:48a814f67be1abefe6c1495013808d1ff8e6b294f78384c88f5a93b81f7015fd",
+                "sha256:5d7667c0bfcd2f27e10c77d8096925eb547764d7b9ff4824430aa9b3c63b7aa0"
+            ],
+            "version": "==1.3.0"
         },
         "whitenoise": {
             "hashes": [
