@@ -17,14 +17,14 @@
           </div>
         </div>
         <!--  This anchor tag will redirect back to artist list without a query param -->
-        <a class="button is-dark" href="{% url 'chefs_list' %}">Clear Search</a>
+        <a class="button is-danger" href="{% url 'chefs_list' %}">Clear Search</a>
       </form>
     <div class="gallery">
       {% for chef in chefs %}
     
         <div class="card">
           <a href="{% url 'chef_detail' chef.pk %}">
-            Chef {{chef.first_name}} in {{chef.location}}
+            Chef {{chef.username}} in {{chef.location}}
           </a> 
         </div>
         {% empty %}

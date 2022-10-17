@@ -4,7 +4,7 @@
 <h1 class="title">New Chef Signup</h1>
 <form method="post" action="{% url 'register_chef' %}">
     {% csrf_token %} {{ form.as_div }}
-    <input type="submit" class="btn" value="Sign Up" />
+    <input class="button is-success" type="submit" value="Sign Up" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
