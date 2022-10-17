@@ -1,9 +1,40 @@
 {% extends 'nav.html' %} 
 {% block content %}
-<h1 class="pt-3">Update your bio! </h1>
+<style>
+  .button{
+    margin-top: 15px;
+  }
+  #small-input{
+    width: 35%;
+  }
+</style>
+
+<h1 class="pt-3 title is-3">Update your Profile! </h1>
 
 <form action="" method="post">
-  {% csrf_token %} {{form.as_p}} <input type="submit" value="Submit" />
+  {% csrf_token %} 
+
+  <label>Bio</label>
+  <div class="control">
+      <textarea
+          class="textarea"
+          rows="5"
+          name="bio"
+          required
+      >{{chef.bio}}</textarea>
+  </div>
+  <label>Profile Picture</label>
+  <div class="control" id="small-input">
+      <input
+          class="input"
+          type="file"
+          name="profile_picture"
+          value="{{chef.profile_pic_url}}"
+      />
+  </div>
+  <div class="control">
+      <input class="button is-primary" type="submit" value="Update Profile" />
+  </div>
 </form>
 
 {% endblock %}
