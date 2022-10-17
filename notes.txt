@@ -126,3 +126,10 @@ test button for chat room
     </div>
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+
+
+<!-- {% load static %}
+{% load ratings %} -->
+
+<!-- {% ratings chef %} -->
