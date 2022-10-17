@@ -1,6 +1,7 @@
 from datetime import date
 from email.policy import default
 from random import choices
+from tabnanny import verbose
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.urls import reverse 
@@ -13,6 +14,7 @@ class User(AbstractUser):
 
     role = models.CharField(verbose_name='role', max_length=50, choices=Role.choices, default=Role.CLIENT)
     location = models.CharField(verbose_name='location', max_length=50)
+    bio = models.TextField(verbose_name='bio', max_length=500, default='bio')
 
     def get_absolute_url(self):
         return '{}'.format(self.username)
