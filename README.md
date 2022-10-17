@@ -26,9 +26,10 @@ Thankfully, Django makes user and user creation very easy to control with their 
 
 Going forward, as mentioned above one of the primary features I would like to implement is a built-in calendar for our chefs to manage their events. The second feature that would be most useful in my opinion would be a direct messaging feature to allow better communication channels between users.
 
-# Framework / Language
+# Technology Used
 Django
 Python
+Bulma
 
 Feel free to visit the page!
 
