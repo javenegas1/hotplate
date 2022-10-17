@@ -1,8 +1,9 @@
+{% extends 'nav.html' %}
 {% block content %}
 
 <h1 class="title">New Client Alert</h1>
 <form method="post" action="{% url 'register_client' %}">
-    {% csrf_token %} {{ form.as_p }}
+    {% csrf_token %} {{ form.as_div }}
     <input type="submit" class="btn" value="Sign Up" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>

@@ -4,11 +4,37 @@
     .login{
         padding-top: 30px;
     }
+    #small-input{
+        width: 30%;
+    }
+    .button{
+        margin-top: 15px;
+    }
 </style>
 <div class="login">
 <h1 class="title">Log In</h1>
 <form method="post" action="{% url 'login' %}">
-    {% csrf_token %} {{ form.as_p }}
+    {% csrf_token %} 
+
+    <label>Username</label>
+    <div class="control" id="small-input">
+        <input
+            class="input"
+            type="text"
+            name="username"
+            required
+        />
+    </div>
+    <label>Password</label>
+    <div class="control" id="small-input">
+        <input
+            class="input"
+            type="password"
+            name="password"
+            required
+        />
+    </div>
+    
     <input type="submit" class="button is-success" value="Login" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>

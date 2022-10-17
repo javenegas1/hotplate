@@ -60,3 +60,69 @@ test button for chat room
                 </div>
             </div>
         </form>
+
+<------------------------------------------>
+<form method="post" action="{% url 'register_chef' %}">
+{% csrf_token %}
+<div class="field-body">
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input" name="first_name" type="text">
+      </p>
+    </div>
+    <div class="field">
+      <p class="control is-expanded">
+        <input class="input" name="last_name" type="text" placeholder="Last Name">
+      </p>
+    </div>
+  </div>
+  
+  <div class="field">
+    <label class="label">Username</label>
+    <div class="control has-icons-left has-icons-right">
+      <input class="input" type="text">
+      <span class="icon is-small is-left">
+        <i class="fas fa-user"></i>
+      </span>
+    </div>
+    <p class="help">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only</p>
+  </div>
+  
+  <div class="field">
+    <label class="label">Email</label>
+    <div class="control has-icons-left">
+      <input class="input" type="email" placeholder="hello@">
+      <span class="icon is-small is-left">
+        <i class="fas fa-envelope"></i>
+      </span>
+    </div>
+  </div>
+
+  <div class="field">
+    <label class="label">Password</label>
+    <div class="control">
+      <input class="input" type="password" name="password1">
+    </div>
+    <p class="help">Your password can’t be too similar to your other personal information.</p>
+    <p class="help">Your password must contain at least 8 characters</p>
+    <p class="help">Your password can’t be a commonly used password</p>
+    <p class="help">Your password can’t be entirely numeric</p>
+
+  </div>
+
+  <div class="field">
+    <label class="label">Password Confirmation</label>
+    <div class="control">
+      <input class="input" type="password" name="password2">
+    </div>
+  </div>
+  
+  <div class="field">
+    {{form.location}}
+  </div>
+  
+    <div class="control">
+      <button class="button is-link">Sign Up</button>
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+</form>
