@@ -30,6 +30,7 @@ Going forward, as mentioned above one of the primary features I would like to im
 Django
 Python
 Bulma
+PostgresQL
 
 Feel free to visit the page!
 
