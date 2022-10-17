@@ -29,7 +29,7 @@
           
             {% if user.is_authenticated %}
                 <div class="navbar-menu navbar-end">
-                    <span class="navbar-item">Hello, {{user.first_name}}!</span>
+                    <span class="navbar-item">Hello, {{user.username}}!</span>
                     <a class="navbar-item" href="/accounts/profile">Profile</a>
                     <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
                 </div>
