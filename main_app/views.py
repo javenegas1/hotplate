@@ -57,6 +57,20 @@ class Profile(TemplateView):
         context['clientreqs'] = Request.objects.filter(user=self.request.user.id)
         return context
 
+@method_decorator(login_required, name='dispatch')
+class ProfileUpdate(UpdateView):
+    model = Chef 
+    fields = ['bio', 'location']
+    template_name = "profile_update.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['chefs'] = Chef.objects.filter(id=self.request.user.id)
+        return context
+
+    def get_success_url(self):
+        return 'accounts/profile/'
+
 class ChefsList(TemplateView):
     template_name = 'chefs_list.html'
 

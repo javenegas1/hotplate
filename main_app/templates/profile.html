@@ -15,7 +15,12 @@
         <h3 id="main-title" class="title is-3">Welcome {{user.role}} {{user.first_name}}!</h3>
         
         {% if user.role == "CHEF" %}
-        
+        <div>
+          <h3 id="request-title" class="title is-4"><a href="/accounts/profile/{{user.id}}/update">Manage Profile Details</a></h3>
+        </div>
+
+        <hr>
+
         <h3 id="request-title" class="title is-4">Manage your requests below...</h3>
         {% for request in requests%}
         <span><b>{{request.title}}</b></span>
