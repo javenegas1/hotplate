@@ -1,9 +1,62 @@
 {% extends 'nav.html' %} 
 {% block content %}
-<h1 class="pt-3">Update {{request.title}} </h1>
 
-<form action="" method="post">
-  {% csrf_token %} {{form.as_p}} <input type="submit" value="Submit" />
+<style>
+  #update{
+    width: 70%;
+  }
+  #small-input{
+    width: 20%;
+  }
+  .button{
+    margin-top: 15px;
+  }
+</style>
+<h1 class="pt-3 title is-3">Update - {{request.title}} </h1>
+
+<form id='update' action="" method="post">
+  {% csrf_token %}
+        <label>Title</label>
+        <div class="control">
+            <input
+                class="input"
+                type="text"
+                name="title"
+                value="{{request.title}}"
+                required
+            />
+        </div>
+        <label>Summary</label>
+        <div class="control">
+            <textarea
+                class="textarea"
+                rows="5"
+                name="summary"
+                required
+            >{{request.summary}}</textarea>
+            <label>Number of people</label>
+            <div class="control" id="small-input">
+                <input
+                    class="input"
+                    type="number"
+                    name="people"
+                    value="{{request.people}}"
+                    min="1"
+                    required
+                />
+                <label>Date of Event</label>
+            <div class="control">
+                <input
+                    class="input"
+                    type="date"
+                    name="date_of_event"
+                    value="{{request.date_of_event}}"
+                    required
+                />
+        </div>
+        <div class="control">
+            <input class="button is-primary" type="submit" value="Update Request" />
+        </div>
 </form>
 
 {% endblock %}
