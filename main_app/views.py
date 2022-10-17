@@ -76,7 +76,7 @@ class ChefsList(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        location = self.request.GET.get('')
+        location = self.request.GET.get('location')
 
         if location != None:
             context["chefs"] = Chef.objects.filter(location__icontains=location)
