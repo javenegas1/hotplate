@@ -54,6 +54,7 @@ class Profile(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['requests'] = Request.objects.filter(chef=self.request.user.id)
+        context['clientreqs'] = Request.objects.filter(user=self.request.user.id)
         return context
 
 class ChefsList(TemplateView):

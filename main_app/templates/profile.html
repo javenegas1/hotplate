@@ -3,7 +3,7 @@
     {% extends 'nav.html' %} 
     <style>
         #main-title{
-            padding-top: 30px;
+            padding-top: 50px;
         }
         #request-title{
             padding-bottom: 30px;
@@ -12,7 +12,7 @@
     <body>
         {% block content %}
         <div>
-        <h3 id="main-title" class="title is-3">Welcome: {{user.role}} {{user.first_name}} {{user.last_name}}</h3>
+        <h3 id="main-title" class="title is-3">Welcome {{user.role}} {{user.first_name}}</h3>
         
         {% if user.role == "CHEF" %}
         
@@ -33,8 +33,6 @@
                               {{request.date_of_event}}
                             </p>
                           </div>
-                          <nav class="level is-mobile">
-                          </nav>
                         </div>
                       </article>
                      <div class="detail__container">
@@ -59,7 +57,41 @@
         </article>
         {% endfor %}
         {% else %}
-        <p>hello</p>
+        <h3 id="request-title" class="title is-4">Manage your requests below...</h3>
+        {% for clientreq in clientreqs%}
+        <span><b>{{clientreq.title}}</b></span>
+                     <article class="media">
+
+                        <div class="media-content">
+                          <div class="content">
+                            <p>
+                              <strong>{{clientreq.user.first_name}}</strong> <small>@{{clientreq.user.username}} </small>
+                              <br>
+                              {{clientreq.summary}} 
+                              <br>
+                              Estimated: {{clientreq.people}} people
+                              <br>
+                              {{clientreq.date_of_event}}
+                            </p>
+                          </div>
+                        </div>
+                      </article>
+                      <div class="buttons">
+                        <a href="{% url 'request_update' clientreq.pk %}" class="button is-info">
+                            <span class="icon">
+                                <i class="fas fa-edit"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <hr>
+
+                {% empty %}
+                <article class="message">
+                    <div class="message-header">
+                      <p>No Requests Available</p>
+                    </div>
+                  </article>
+                  {% endfor %}
         {% endif %}
         {% endblock %}
         </div>
